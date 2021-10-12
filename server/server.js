@@ -1,7 +1,7 @@
 const express = require('express'); // express 사용
 const app = express();
 const bodyParser = require('body-parser'); // body-parser 미들웨어 
-const PORT = process.env.PORT || 3030;
+const PORT = process.env.PORT || 3030;  //3030 port 사용 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
