@@ -7,6 +7,7 @@ window.onload = function() {
     const recognition = new window.webkitSpeechRecognition();
     const language = 'ko-KR';
     const micBtn = document.querySelector('.mic');
+    const saveBtn = document.querySelector('.save');
     const resultWrap = document.querySelector('.result');
     const recognizedTextarea = document.querySelector('.recognized-textarea');
     const recording_state = document.querySelector('#recording-state');
@@ -19,6 +20,7 @@ window.onload = function() {
     let finalTranscript = '';
 
     var a = '';
+    var translate;
 
     recognition.continuous = true;
     recognition.interimResults = true; 
@@ -113,6 +115,16 @@ window.onload = function() {
         if (isRecognizing) { //녹음 버튼을 두번 누른거니까 종료
             recognition.stop();
             console.log('종료');
+            /* 번역 텍스트 파일 다운로드
+            var hiddenElement = document.createElement('a');
+            hiddenElement.href = 'data:attachment/text,' + encodeURI(recognizedTextarea.innerText);
+            hiddenElement.target = '_blank';
+            hiddenElement.download = 'translate.txt';
+            hiddenElement.click();
+            */
+            /* 소켓 통신
+            socket.emit('translate', {type: 'mymessage', message: translate});
+            */
             return;
         }
         recognition.lang = language;
@@ -144,13 +156,15 @@ window.onload = function() {
                     htmlEl = htmlEl + `<span class="resultWord" id=${index}>${value}<span/> ` 
                 }
             });
+            
             // console.log('htmlEl : ' + htmlEl);
             
             // const resultWord = document.querySelector('.resultWord');
             // resultWord.addEventListener('click', resultWordHandler);
 
-            final_span.innerHTML = a + ' ' + htmlEl;
-            a = a + ' ' + htmlEl;
+            final_span.innerHTML = a + htmlEl;
+            a = a + htmlEl + '<br/>';
+            translate = recognizedTextarea.innerHTML; // translate 변수에 총 번역본 저장
         }else {
             return null;
         }
