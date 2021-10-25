@@ -8,7 +8,7 @@ import Home from './components/Home';
 
 const App = () => (
     <Router>
-        <Route path="/"   component={Home} />
+        <Route path="/" component={Home} />
     </Router>
 );
 
