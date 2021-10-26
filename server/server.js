@@ -23,6 +23,14 @@ if(process.env.NODE_ENV === 'production') {  //AWS서버에서 돌아가면 빌�
   })
 };
 
+io.on('connection', (socket) => {
+  console.log('connection success');
+
+  socket.on('disconnect', () => {
+    console.log('connection end');
+  })
+});
+
 app.use('/translate', express.static(path.join(__dirname, "../client/translate")));
 
 

@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../asset/logo.png';
 import './Home.css';
+import io from 'socket.io-client';
+import queryString from 'query-string';
+
+let socket;
+const ENDPOINT = 'localhost:3030';
 
 const Timer = () => {
   const [visible, setVisible] = useState(true);
@@ -88,7 +93,9 @@ const Home = () => {
 /*----------------------------- 음성 인식 -----------------------------------------*/
 
 function SpeechToText () {
-
+  
+  socket = io(ENDPOINT);
+  
   try{
     var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     var recognition = new SpeechRecognition();
