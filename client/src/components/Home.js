@@ -162,17 +162,23 @@ function SpeechToText () {
           return;
       }
 
+      
       for (let i = event.resultIndex; i < event.results.length; ++i) {
           const transcript = event.results[i][0].transcript;
           if (event.results[i].isFinal) {
               finalTranscript += transcript;
+              socket.emit('message', {message:finalTranscript});
           } else {
               interimTranscript += transcript;
           }
       }
+      
+      
 
       console.log('번역중 : ', interimTranscript);
       console.log('최종번역 : ', finalTranscript);
+      
+      finalTranscript=' ';
       // fireCommand(interimTranscript);
   };
 

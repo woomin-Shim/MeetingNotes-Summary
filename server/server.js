@@ -25,13 +25,20 @@ if(process.env.NODE_ENV === 'production') {  //AWS서버에서 돌아가면 빌�
 
 io.on('connection', (socket) => {
   console.log('connection success');
+  arr = [];
+
+  socket.on('message', (data) => {
+    arr.push(data.message);
+    console.log(data.message);
+  })
 
   socket.on('disconnect', () => {
     console.log('connection end');
+    console.log(arr);
   })
 });
 
-app.use('/translate', express.static(path.join(__dirname, "../client/translate")));
+//app.use('/translate', express.static(path.join(__dirname, "../client/translate")));
 
 
 // 해당 포트로 서버를 실행
