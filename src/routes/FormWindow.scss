@@ -1,0 +1,172 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,700);
+
+html {
+  font-family: Raleway;
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  background-color: #f3f3fb;
+}
+
+.demo {
+  background-color: #fff;
+  display: inline-block;
+  padding: 50px;
+  border-radius: 20px;
+  color: #666;
+  text-align: center;
+  height: 70%;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.demo__content {
+  text-align: left;
+  display: inline-block;
+}
+
+.demo__title {
+  font-size: 36px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding-bottom: 30px;
+}
+
+.switcher {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  padding-left: 120px;
+  height: 40px;
+  line-height: 40px;
+  margin: 20px;
+  font-size: 20px;
+  user-select: none;
+
+  input {
+    display: none;
+  }
+}
+.demo__content__button {
+  display: flex;
+  justify-content: center;
+}
+.demo__content__button .button {
+  margin: 20px;
+}
+.button-two {
+  text-align: center;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: #1886f3;
+  border: none;
+  padding: 20px;
+  width: 150px;
+  transition: all 0.5s;
+  font-size: 16px;
+  color: white;
+  margin-top: 20px;
+}
+.button-two span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.demo__content__button .cancle {
+  background-color: #ccc;
+}
+.button-two span:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button-two:hover span {
+  padding-right: 25px;
+}
+
+.button-two:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+.switcher__indicator {
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 40px;
+    width: 40px;
+    background-color: #d5d5d5;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    animation-name: pulsein;
+    animation-duration: 0.3s;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 16px;
+    left: 0;
+    width: 80px;
+    height: 8px;
+    background-color: #d5d5d5;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+  }
+
+  input:checked + &::after {
+    background-color: #29ce9a;
+    transform: translateX(40px);
+    animation-name: pulseout;
+    animation-duration: 0.3s;
+  }
+
+  input:checked + &::before {
+    background-color: #29ce9a;
+  }
+
+  input:disabled + &::after,
+  input:disabled + &::before {
+    background-color: #e5e5e5;
+  }
+}
+
+@keyframes pulsein {
+  0%,
+  100% {
+    top: 0px;
+    height: 40px;
+    width: 40px;
+  }
+  50% {
+    top: 6px;
+    height: 28px;
+    width: 52px;
+  }
+}
+
+@keyframes pulseout {
+  0%,
+  100% {
+    top: 0px;
+    height: 40px;
+    width: 40px;
+  }
+  50% {
+    top: 6px;
+    height: 28px;
+    width: 52px;
+  }
+}

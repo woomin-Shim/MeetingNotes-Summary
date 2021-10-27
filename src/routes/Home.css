@@ -1,0 +1,211 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.header {
+  height: 100vh;
+}
+.navbar {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  position: fixed;
+  width: 100%;
+  padding: 8px;
+}
+.navbar > img {
+  width: auto;
+  height: 8vh;
+}
+.info {
+  padding-top: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: white;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), /* bottom, image */ url(../asset/background.jpg);
+  background-position: center center;
+  background-size: cover;
+  font-family: 'Nanum Pen Script', cursive;
+}
+
+.info__textbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+.info__textbox__bigText {
+  font-size: 48px;
+}
+.info__textbox__smallText {
+  font-size: 24px;
+  line-height: 50px;
+}
+.recoder {
+  height: 100vh;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.recoder__text {
+  margin-bottom: 60px;
+}
+
+.recoder__text span {
+  font-weight: bold;
+  font-size: 48px;
+}
+
+.recode__button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  margin-top: 20px;
+}
+.recode__button button {
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  background-color: #e3eaf1;
+  margin: 30px;
+  color: black;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.sub-main .button-two {
+  text-align: center;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #1886f3;
+  border: none;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  font-size: 20px;
+  color: white;
+  margin-top: 20px;
+}
+
+.button-two span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button-two span:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button-two:hover span {
+  padding-right: 25px;
+}
+
+.button-two:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+.recode__button .stop:hover {
+  color: red;
+  background-color: black;
+}
+
+.recode__button .mic:hover {
+  color: white;
+  background-color: black;
+}
+
+.recoder__timer {
+  font-size: 26px;
+}
+
+.recoder__animation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 80px;
+  margin-top: 40px;
+}
+.loader {
+  width: 80px;
+  height: 80px;
+  text-align: center;
+  font-size: 10px;
+  -webkit-transform: translateY(-50%) translateX(-50%);
+}
+.loader > div {
+  height: 100%;
+  width: 8px;
+  display: inline-block;
+  margin-left: 2px;
+  -webkit-animation: delay 0.8s infinite ease-in-out;
+  animation: delay 0.8s infinite ease-in-out;
+}
+.loader .bar1 {
+  background-color: #754fa0;
+}
+.loader .bar2 {
+  background-color: #09b7bf;
+  -webkit-animation-delay: -0.7s;
+  animation-delay: -0.7s;
+}
+.loader .bar3 {
+  background-color: #90d36b;
+  -webkit-animation-delay: -0.6s;
+  animation-delay: -0.6s;
+}
+.loader .bar4 {
+  background-color: #f2d40d;
+  -webkit-animation-delay: -0.5s;
+  animation-delay: -0.5s;
+}
+.loader .bar5 {
+  background-color: #fcb12b;
+  -webkit-animation-delay: -0.4s;
+  animation-delay: -0.4s;
+}
+.loader .bar6 {
+  background-color: #ed1b72;
+  -webkit-animation-delay: -0.3s;
+  animation-delay: -0.3s;
+}
+@-webkit-keyframes delay {
+  0%,
+  40%,
+  100% {
+    -webkit-transform: scaleY(0.05);
+  }
+  20% {
+    -webkit-transform: scaleY(1);
+  }
+}
+@keyframes delay {
+  0%,
+  40%,
+  100% {
+    transform: scaleY(0.05);
+    -webkit-transform: scaleY(0.05);
+  }
+  20% {
+    transform: scaleY(1);
+    -webkit-transform: scaleY(1);
+  }
+}
