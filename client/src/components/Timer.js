@@ -19,7 +19,7 @@ const Timer = () => {
   let cron;
 
   const startButton = () => {
-    SpeechToText();
+    SpeechToText(); //음성인식, 변환 기능 호출 
     setCurrentState(false);
     updateTimer();
     cron = setInterval(updateTimer, 1000);
@@ -66,6 +66,7 @@ const Timer = () => {
   );
 };
 
+
 /*---------------------------------------------음성 인식 ---------------------------------*/
 function SpeechToText () {
   
@@ -91,7 +92,7 @@ function SpeechToText () {
   
     recognition.continuous = true;
     recognition.interimResults = true; 
-    recognition.maxAlternatives = 10000;
+    recognition.maxAlternatives = 5;
     //true : recognition이 result의 중간중간을 보고한다
     
     /**
