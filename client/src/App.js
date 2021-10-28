@@ -1,15 +1,13 @@
-import React from 'react';
+// bootstrap install : npm install react-bootstrap bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
+import AppRouter from './components/Routes';
 
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-
-import Home from './components/Home';
-
-
-
-const App = () => (
-    <Router>
-        <Route path="/" component={Home} />
-    </Router>
-);
+function App() {
+  return (
+    <div className='App'>
+      <AppRouter />
+    </div>
+  );
+}
 
 export default App;

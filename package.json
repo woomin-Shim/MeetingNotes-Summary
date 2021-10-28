@@ -22,6 +22,7 @@
         "http-proxy-middleware": "^2.0.1",
         "nodemon": "^2.0.14",
         "path": "^0.12.7",
+        "react-modal": "^3.14.3",
         "socket.io": "^2.3.0"
     }
 }
