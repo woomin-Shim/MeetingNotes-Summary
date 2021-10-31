@@ -1,0 +1,46 @@
+.noteDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: 90vh;
+  overflow: auto;
+  padding-bottom: 10%;
+}
+.noteText {
+  text-align: center;
+  font-size: 32px;
+  padding-bottom: 5%;
+}
+
+.noteTable {
+  width: 70%;
+  text-align: center;
+}
+
+.noteTable tr {
+  height: 50px;
+}
+.noteTable,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.noteTable input {
+  width: 95%;
+  height: auto;
+  border: none;
+}
+.meetingNote * {
+  height: 200px;
+}
+
+td span {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  padding-left: 35%;
+}

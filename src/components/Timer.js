@@ -29,6 +29,19 @@ const Timer = () => {
     Time++;
   };
 
+  const showDiv1 = () => {
+    document.getElementById('btn1').style.visibility = 'visible';
+  };
+  const showDiv2 = () => {
+    document.getElementById('btn2').style.visibility = 'visible';
+  };
+
+  const hideDiv1 = () => {
+    document.getElementById('btn1').style.visibility = 'hidden';
+  };
+  const hideDiv2 = () => {
+    document.getElementById('btn2').style.visibility = 'hidden';
+  };
   return (
     <div>
       <div className='recoder__timer'>
@@ -41,19 +54,24 @@ const Timer = () => {
         )}
       </div>
       <div className='recode__button'>
-        <button className='icon mic' onClick={startButton}>
-          <i className='fas fa-microphone fa-2x'></i>
-        </button>
-        <button className='icon stop'>
-          <i className='fas fa-stop fa-2x'></i>
-        </button>
-      </div>
-      <div class='sub-main'>
-        <Link to={'/formWindow'}>
-          <button class='button-two'>
-            <span>회의록 만들기</span>
+        <div className='recode__button__div'>
+          <div className='arrow_box' id='btn1'>
+            녹음하기
+          </div>
+          <button className='icon mic' onClick={startButton} onMouseOver={showDiv1} onMouseOut={hideDiv1}>
+            <i className='fas fa-microphone fa-2x'></i>
           </button>
-        </Link>
+        </div>
+        <div className='recode__button__div'>
+          <div className='arrow_box' id='btn2'>
+            녹음중지
+          </div>
+          <Link to='/result'>
+            <button className='icon stop' onMouseOver={showDiv2} onMouseOut={hideDiv2}>
+              <i className='fas fa-stop fa-2x'></i>
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

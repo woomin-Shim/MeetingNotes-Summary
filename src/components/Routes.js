@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Home from '../routes/Home';
-import FormWindow from '../routes/FormWindow';
+import Result from '../routes/Result';
 
 const Routes = () => {
   return (
     <Router>
       <Route exact path='/' component={Home} />
-      <Route path='/formWindow' component={FormWindow} />
+      <Route path='/result' component={Result} />
     </Router>
   );
 };
