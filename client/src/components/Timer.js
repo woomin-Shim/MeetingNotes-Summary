@@ -1,6 +1,5 @@
 import React, { useState, useHistory, useCallback } from 'react';
 import '../routes/Home.css';
-import FormModal from '../routes/FormModal';
 import { Modal, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import io from 'socket.io-client';
@@ -26,9 +25,10 @@ const Timer = () => {
     console.log('start');
   };
 
-  const stopButton = () => {
-    return { FormModal };
+  const stopButton =() => {
+    SocketOff();
   }
+
   const updateTimer = () => {
     const checkMinutes = Math.floor(Time / 60);
     const hours = Math.floor(Time / 3600);
@@ -40,6 +40,20 @@ const Timer = () => {
     Time++;
   };
 
+
+  const showDiv1 = () => {
+    document.getElementById('btn1').style.visibility = 'visible';
+  };
+  const showDiv2 = () => {
+    document.getElementById('btn2').style.visibility = 'visible';
+  };
+
+  const hideDiv1 = () => {
+    document.getElementById('btn1').style.visibility = 'hidden';
+  };
+  const hideDiv2 = () => {
+    document.getElementById('btn2').style.visibility = 'hidden';
+  };
   return (
     <div>
       <div className='recoder__timer'>
@@ -52,15 +66,24 @@ const Timer = () => {
         )}
       </div>
       <div className='recode__button'>
-        <button onClick={startButton}>
-          <i className='fas fa-microphone fa-2x'></i>
-        </button>
-        
-        <a href = "/speechtoTextEnd">
-        <button onClick={stopButton}>
-          <i className='fas fa-stop fa-2x'></i>
-        </button>
-        </a>
+        <div className='recode__button__div'>
+          <div className='arrow_box' id='btn1'>
+            녹음하기
+          </div>
+          <button className='icon mic' onClick={startButton} onMouseOver={showDiv1} onMouseOut={hideDiv1}>
+            <i className='fas fa-microphone fa-2x'></i>
+          </button>
+        </div>
+        <div className='recode__button__div'>
+          <div className='arrow_box' id='btn2'>
+            녹음중지
+          </div>
+          <a href ='/result'>
+            <button className='icon stop' onClick={SocketOff} onMouseOver={showDiv2} onMouseOut={hideDiv2}>
+              <i className='fas fa-stop fa-2x'></i>
+            </button>
+          </a>
+        </div>
       </div>
     </div>
   );
@@ -68,6 +91,9 @@ const Timer = () => {
 
 
 /*---------------------------------------------음성 인식 ---------------------------------*/
+function SocketOff() {
+  socket.off();
+}
 function SpeechToText () {
   
     socket = io(ENDPOINT);
@@ -92,7 +118,7 @@ function SpeechToText () {
   
     recognition.continuous = true;
     recognition.interimResults = true; 
-    recognition.maxAlternatives = 5;
+    recognition.maxAlternatives =100;
     //true : recognition이 result의 중간중간을 보고한다
     
     /**

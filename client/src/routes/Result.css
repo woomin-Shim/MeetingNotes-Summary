@@ -1,0 +1,74 @@
+.noteDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: 90vh;
+    overflow: auto;
+    padding-bottom: 10%;
+    font-family: 'Nanum Gothic', sans-serif;
+  }
+  .noteText {
+    text-align: center;
+    font-size: 20px;
+    padding-bottom: 2%;
+    font-weight: bold;
+  }
+  
+  .noteTable {
+    width: 90%;
+    text-align: center;
+  }
+  
+  .noteTable tr {
+    height: 50px;
+  }
+  .noteTable,
+  th,
+  td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  
+  .noteTable input {
+    width: 95%;
+    height: auto;
+    border: none;
+  }
+  .meetingNote * {
+    height: 200px;
+  }
+  
+  td span {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding-left: 35%;
+  }
+  
+  button {
+    width: 50px;
+    height: 50px;
+    background-color: #eee;
+    border: 1px solid black;
+    color: black;
+  }
+  
+  @media screen and (max-width: 743px) {
+    .noteText {
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      padding-bottom: 20px;
+    }
+    .noteDiv {
+      height: 110vh;
+      font-size: 10px;
+    }
+    button {
+      width: 40px;
+      height: 40px;
+      display: inline-block;
+    }
+  }
