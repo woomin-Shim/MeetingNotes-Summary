@@ -77,7 +77,7 @@ const Timer = () => {
             녹음중지
           </div>
           <a href ='/result'>
-            <button className='icon stop' onClick={SocketOff} onMouseOver={showDiv2} onMouseOut={hideDiv2}>
+            <button className='icon stop' onMouseOver={showDiv2} onMouseOut={hideDiv2}>
               <i className='fas fa-stop fa-2x'></i>
             </button>
           </a>
