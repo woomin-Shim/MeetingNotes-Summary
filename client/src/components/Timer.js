@@ -25,9 +25,7 @@ const Timer = () => {
     console.log('start');
   };
 
-  const stopButton =() => {
-    SocketOff();
-  }
+  
 
   const updateTimer = () => {
     const checkMinutes = Math.floor(Time / 60);
@@ -70,7 +68,7 @@ const Timer = () => {
           <div className='arrow_box' id='btn1'>
             녹음하기
           </div>
-          <button className='icon mic' onClick={startButton} onMouseOver={showDiv1} onMouseOut={hideDiv1}>
+          <button className='icon mic' onMouseOver={showDiv1} onMouseOut={hideDiv1}>
             <i className='fas fa-microphone fa-2x'></i>
           </button>
         </div>
@@ -91,9 +89,7 @@ const Timer = () => {
 
 
 /*---------------------------------------------음성 인식 ---------------------------------*/
-function SocketOff() {
-  socket.off();
-}
+
 function SpeechToText () {
   
     socket = io(ENDPOINT);
