@@ -6,7 +6,7 @@ import io from 'socket.io-client';
 import queryString from 'query-string';
 
 let socket;
-const ENDPOINT = 'localhost:3030';
+const ENDPOINT = 'localhost:3030';  // or ngrok forwading ip 
 
 const Timer = () => {
   const [currentState, setCurrentState] = useState(false);
@@ -25,8 +25,7 @@ const Timer = () => {
     console.log('start');
   };
 
-  
-
+ 
   const updateTimer = () => {
     const checkMinutes = Math.floor(Time / 60);
     const hours = Math.floor(Time / 3600);
@@ -68,7 +67,7 @@ const Timer = () => {
           <div className='arrow_box' id='btn1'>
             녹음하기
           </div>
-          <button className='icon mic' onMouseOver={showDiv1} onMouseOut={hideDiv1}>
+          <button className='icon mic' onClick={startButton} onMouseOver={showDiv1} onMouseOut={hideDiv1}>
             <i className='fas fa-microphone fa-2x'></i>
           </button>
         </div>
@@ -112,7 +111,7 @@ function SpeechToText () {
     var a = '';
     var translate;
   
-    recognition.continuous = true;
+    recognition.continuous = false;  // mobile에서 false로 해야지 정상적인 문장 출력, web 환경은 True가 better 
     recognition.interimResults = true; 
     recognition.maxAlternatives =100;
     //true : recognition이 result의 중간중간을 보고한다
@@ -132,7 +131,7 @@ function SpeechToText () {
     recognition.onend = function () {
         console.log('onend', arguments);
         isRecognizing = false;
-  
+        recognition.start();  // mobile 한 문장 듣고 끊기는 현상 해결 
         if (ignoreEndProcess) {
             return false;
         }
