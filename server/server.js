@@ -4,12 +4,15 @@ const socketio = require('socket.io');
 const cors = require('cors');
 const http = require('http');
 const path = require('path');
+const mysql = require('mysql');
+const spawn = require('child_process').spawn;
 //const server = require('http').Server(app)
 
 const app = express();
 const server = require('http').Server(app);
 const io = socketio(server);
 const PORT = process.env.PORT || 3030;  //3030 port 사용 
+const textArray = [];
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -23,18 +26,53 @@ if(process.env.NODE_ENV === 'production') {  //AWS서버에서 돌아가면 빌�
   })
 };
 
+/********************  DB ***************************/
+const conn = {
+  host : 'localhost',
+  port : '3306',
+  user : 'root',
+  password : '',
+  database : 'meeting'
+};
+
+mysqlDB = mysql.createConnection(conn);
+
+
+/*************** socket connection *************************** */
 io.on('connection', (socket) => {
   console.log('connection success');
-  arr = [];
 
   socket.on('message', (data) => {
-    arr.push(data.message);
+    textArray.push(data.message);
     console.log(data.message);
   })
 
   socket.on('disconnect', () => {
     console.log('connection end');
-    console.log(arr);
+    //console.log(textArray);
+
+    const textInput = textArray.join();  // conversion Array to string 
+    console.log(textInput);
+
+    var sql = 'INSERT INTO script VALUE(?)';
+    mysqlDB.query(sql, [textInput], function (err, results) {
+      if(err) console.log(err);
+      else {
+        console.log('DB INPUT Success');
+      }
+    })
+
+    //python 연동 
+    const summary = spawn('python', ['summary.py', textInput]);
+
+    summary.stdout.on('data', function(result, error) {
+      if(error) {
+        console.log('error occur!!');
+      }
+
+      var summaryResult = result.toString('utf8');
+      console.log('요약 결과 : ' + summaryResult);
+    })
   })
 });
 

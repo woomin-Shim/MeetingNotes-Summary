@@ -6,7 +6,8 @@ import io from 'socket.io-client';
 import queryString from 'query-string';
 
 let socket;
-const ENDPOINT = 'localhost:3030';  // or ngrok forwading ip 
+
+const ENDPOINT = 'http://localhost:3030';  // or ngrok forwading ip 
 
 const Timer = () => {
   const [currentState, setCurrentState] = useState(false);
