@@ -6,6 +6,7 @@ const http = require('http');
 const path = require('path');
 const mysql = require('mysql');
 const spawn = require('child_process').spawn;
+//const spawn = require('child-process').spawn; 
 //const server = require('http').Server(app)
 
 const app = express();
@@ -31,7 +32,7 @@ const conn = {
   host : 'localhost',
   port : '3306',
   user : 'root',
-  password : '',
+  password : 'dnals12',
   database : 'meeting'
 };
 
@@ -51,7 +52,7 @@ io.on('connection', (socket) => {
     console.log('connection end');
     //console.log(textArray);
 
-    const textInput = textArray.join();  // conversion Array to string 
+    const textInput = textArray.toString();  // conversion Array to string 
     console.log(textInput);
 
     var sql = 'INSERT INTO script VALUE(?)';
@@ -63,16 +64,37 @@ io.on('connection', (socket) => {
     })
 
     //python 연동 
-    const summary = spawn('python', ['summary.py', textInput]);
+    const summary = spawn('python', ['./almostfinal.py', textInput]);
 
-    summary.stdout.on('data', function(result, error) {
-      if(error) {
-        console.log('error occur!!');
+    //const ex = spawn('python', ['./print.py', textInput]);
+
+    
+    summary.stdout.on('data', function(data) {
+      var summaryResult = data.toString('utf8');
+      console.log(summaryResult);
+
+      /*
+      sql = 'INSERT INTO summary_tbl VALUE(?)';
+      mysqlDB.query(sql, [summaryResult], function (err, results) {
+        if(err) console.log(err);
+        else {
+        console.log('SUMMARY INPUT Success');
       }
-
-      var summaryResult = result.toString('utf8');
-      console.log('요약 결과 : ' + summaryResult);
+      })
+      */
+      
     })
+    
+    summary.stderr.on('data', function(data) {
+      console.log('Error Occur');
+    })
+
+    /*
+      ex.stdout.on('data', function(data) {
+      var result = data.toString('utf8')
+      console.log(result);
+    })
+    */
   })
 });
 

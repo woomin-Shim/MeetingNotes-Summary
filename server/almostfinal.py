@@ -2,10 +2,16 @@
 import sys
 import re
 import string
+import io
 from typing import List
 from textrankr import TextRank
 from textrankr import TextRank
-from konlpy.tag import Komoran
+from konlpy.tag import Komoran   #check
+
+
+sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
+sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
+
 
 #동사를 받아 개조식으로 변경
 #받침이 있으면 음을 붙이고,
@@ -160,9 +166,7 @@ def lastletterchange(line : str):
     return line
 
 
-def main(text:str):
-    
-
+def getResult(text):
     #text = """손흥민(29·토트넘)의 푸스카스 골이 미국 매체가 선정한 잉글랜드 프로축구 프리미어리그(EPL) 역대 30대 명장면에 선정됐다.,미국 매체 NBC스포츠는 EPL 30주년을 기념해 EPL 역사에 남을 장면 30개를 선정해 매주 순위별로 발표하고 있다.,3일(현지시간)에는 손흥민의 번리전 70m 원더골이 28위로 공개됐다.,손흥민은 2019~2020시즌 EPL 번리와의 16라운드 홈 경기에서 70m를 질주해 원더골을 터트렸다. 이 골로 지난해 국제축구연맹(FIFA)에서 시상한 푸스카스상의 주인공이 됐다.,헝가리 축구 전설 페렌츠 푸스카스의 이름을 딴 푸스카스상은 FIFA가 한 해 동안 최고의 골을 넣은 선수에게 수여 한다.,손흥민의 번리전 득점은 2019년 12월 EPL 이달의 골과 2019~2020시즌 올해의 골에 선정되기도 했다.,NBC스포츠는 손흥민의 번리전 원더골에 대해 "손흥민은 디에고 마라도나를 연상시켰다., 그는 여러 명을 제치고 훌륭한 마무리로 토트넘 팬들을 열광시켰다"고 설명했다.,이어 "손흥민은 항상 멋진 골을 넣었지만 이 득점은 EPL 올해의 골뿐만 아니라 FIFA 푸스카스상에도 선정됐다., 최고의 골이라는 데 이견이 없다"고 덧붙였다.,앞서 29위는 뉴캐슬 유나이티드가 2010~2011시즌 아스널을 상대로 0-4로 뒤지다가 4-4 동점을 만든 경기가 뽑혔고 30위는 아스널 레전드 공격수 데니스 베르캄프의 1997~1998시즌 해트트릭이 선정됐다."""
 
     linecount = 0
@@ -197,12 +201,12 @@ def main(text:str):
         fixedline += "\n"
     fixedline = fixedline[:-1]
     #print("요약 후 :")
-    #print(fixedline)
-    return fixedline
+    print(fixedline)
+    #return fixedline
 
+    
 
-
-if __name__ == "__main__":
-    argument = sys.argv
-    del argument[0]
-    main(argument[0])
+if __name__ == '__main__':
+    #argument = sys.argv[1]
+    #del argument[0]
+    getResult(sys.argv[1])
