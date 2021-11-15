@@ -8,7 +8,7 @@ const Routes = () => {
     <Router>
       <Route exact path='/' component={Home} />
       <Route path='/result' component={Result} />
-      <Route path='/SpeechtoText' component={Home} />
+      <Route path='/speechtoText' component={Result} />
       <Route path='/SpeechtoTextEnd' component={Home} />
     </Router>
   );

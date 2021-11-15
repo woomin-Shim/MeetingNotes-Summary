@@ -14,6 +14,7 @@ const server = require('http').Server(app);
 const io = socketio(server);
 const PORT = process.env.PORT || 3030;  //3030 port 사용 
 const textArray = [];
+//const textInput;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -32,7 +33,7 @@ const conn = {
   host : 'localhost',
   port : '3306',
   user : 'root',
-  password : 'dnals12',
+  password : '',
   database : 'meeting'
 };
 
@@ -96,6 +97,20 @@ io.on('connection', (socket) => {
     })
     */
   })
+});
+
+app.get('/speechtoText', function(req, res) {
+ var sql = 'SELECT * FROM script';
+ mysqlDB.query(sql, function(err, results) {
+   if(err) {
+     return res.send({ code:10, msg: `${err}`});
+   }
+   else {
+    var script = results[0].contents.replace(/,/g, '\n'); // DB안에 contents 
+    console.log('Send to client success');
+    res.send({ code:0, msg: 'request success', script: script });   
+   }
+ })
 });
 
 //app.use('/translate', express.static(path.join(__dirname, "../client/translate")));

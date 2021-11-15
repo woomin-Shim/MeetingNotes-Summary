@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import ReactToPrint from 'react-to-print';
+import axios from 'axios';
 import './Result.css';
 const SimpleComponent = (props) => {
   const { printRef } = props;
@@ -8,6 +9,7 @@ const SimpleComponent = (props) => {
   const month = today.getMonth() + 1;
   const date = today.getDate();
 
+  
   let strDay = `${year} / ${month} / ${date}`;
   return (
     <div className='noteDiv' ref={printRef}>
@@ -77,6 +79,13 @@ const SimpleComponent = (props) => {
 
 const Result = () => {
   const componentRef = useRef(null);
+
+  useEffect ( () => {
+    axios.get('/speechtoText')
+    .then(function(response) {
+      console.log(response.data)
+    })
+  });
 
   return (
     <div>
