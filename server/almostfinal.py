@@ -173,6 +173,7 @@ def getResult(text):
     listtext = text.split(",")
     for i in listtext:
         linecount += 1
+        text = text.replace(",", "\n")
 
 
     class MyTokenizer:

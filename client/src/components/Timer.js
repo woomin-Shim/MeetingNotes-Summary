@@ -77,11 +77,13 @@ const Timer = () => {
           <div className='arrow_box' id='btn2'>
             녹음중지
           </div>
+        
           <a href ='/result'>
-            <button className='icon stop' onMouseOver={showDiv2} onMouseOut={hideDiv2}>
+            <button className='icon stop' onMouseOver={showDiv2} onMouseOut={hideDiv2} >
               <i className='fas fa-stop fa-2x'></i>
-            </button>
+            </button> 
           </a>
+         
         </div>
       </div>
     </div>

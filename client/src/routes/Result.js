@@ -77,15 +77,30 @@ const SimpleComponent = (props) => {
   );
 };
 
-const Result = () => {
-  const componentRef = useRef(null);
+function Result () {
 
+  const componentRef = useRef(null);
+  
+  var requestOptions = {
+    method : 'GET',
+    redirect : 'follow'
+  };
+
+  useEffect ( () => {
+    axios.get('/result')
+    .then(function(response) {
+      console.log(response.data)
+    })
+  });
+
+  /*
   useEffect ( () => {
     axios.get('/speechtoText')
     .then(function(response) {
       console.log(response.data)
     })
   });
+  */
 
   return (
     <div>
@@ -101,6 +116,8 @@ const Result = () => {
       <SimpleComponent printRef={componentRef} /> <printButton />
     </div>
   );
+        
+
 };
 
 export default Result;

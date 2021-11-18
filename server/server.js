@@ -9,6 +9,7 @@ const spawn = require('child_process').spawn;
 //const spawn = require('child-process').spawn; 
 //const server = require('http').Server(app)
 
+
 const app = express();
 const server = require('http').Server(app);
 const io = socketio(server);
@@ -24,16 +25,17 @@ if(process.env.NODE_ENV === 'production') {  //AWS서버에서 돌아가면 빌�
   app.use(express.static(path.join(__dirname, "../client/build")));
   
   app.get('*', (req, res) => {
-      req.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+      res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
   })
 };
+
 
 /********************  DB ***************************/
 const conn = {
   host : 'localhost',
   port : '3306',
   user : 'root',
-  password : '',
+  password : 'dnals12',
   database : 'meeting'
 };
 
@@ -72,9 +74,9 @@ io.on('connection', (socket) => {
     
     summary.stdout.on('data', function(data) {
       var summaryResult = data.toString('utf8');
-      console.log(summaryResult);
+      console.log('요약 : ' + summaryResult);
 
-      /*
+      
       sql = 'INSERT INTO summary_tbl VALUE(?)';
       mysqlDB.query(sql, [summaryResult], function (err, results) {
         if(err) console.log(err);
@@ -82,7 +84,7 @@ io.on('connection', (socket) => {
         console.log('SUMMARY INPUT Success');
       }
       })
-      */
+      
       
     })
     
@@ -99,7 +101,7 @@ io.on('connection', (socket) => {
   })
 });
 
-app.get('/speechtoText', function(req, res) {
+app.get('/result', function(req, res) {
  var sql = 'SELECT * FROM script';
  mysqlDB.query(sql, function(err, results) {
    if(err) {
@@ -112,6 +114,7 @@ app.get('/speechtoText', function(req, res) {
    }
  })
 });
+
 
 //app.use('/translate', express.static(path.join(__dirname, "../client/translate")));
 
