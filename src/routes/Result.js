@@ -17,7 +17,7 @@ const SimpleComponent = (props) => {
           <td>회의일시</td>
           <td>{strDay}</td>
           <td>작성자</td>
-          <td>
+          <td colSpan='3'>
             <input type='text' placeholder='이름' />
           </td>
         </tr>
@@ -33,7 +33,7 @@ const SimpleComponent = (props) => {
             <input type='text' placeholder='제목' />
           </td>
         </tr>
-        <tr className='meetingNote'>
+        <tr classNameName='meetingNote'>
           <td>회의 내용</td>
           <td colSpan='3'></td>
         </tr>
@@ -75,16 +75,21 @@ const SimpleComponent = (props) => {
   );
 };
 
-const printButton = () => {
-  return <button>print</button>;
-};
 const Result = () => {
   const componentRef = useRef(null);
 
   return (
     <div>
       {' '}
-      <ReactToPrint content={() => componentRef.current} trigger={() => <printButton />} /> <SimpleComponent printRef={componentRef} /> <printButton />
+      <ReactToPrint
+        content={() => componentRef.current}
+        trigger={() => (
+          <button>
+            <i className='fas fa-print fa-2x'></i>
+          </button>
+        )}
+      />{' '}
+      <SimpleComponent printRef={componentRef} /> <printButton />
     </div>
   );
 };

@@ -2,7 +2,9 @@ import React from 'react';
 import logo from '../asset/logo.png';
 import './Home.css';
 import Timer from '../components/Timer';
-
+import Test1 from '../components/Test1';
+import Test2 from '../components/Test2';
+import Test3 from '../components/Test3';
 const Home = () => {
   return (
     <div className='App'>
@@ -37,7 +39,7 @@ const Home = () => {
             <div className='bar6'></div>
           </div>
         </div>
-        <Timer />
+        <Test3 />
       </div>
     </div>
   );

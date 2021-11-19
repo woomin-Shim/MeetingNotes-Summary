@@ -43,11 +43,13 @@
 }
 .info__textbox__bigText {
   font-size: 48px;
+  padding-bottom: 40px;
 }
 .info__textbox__smallText {
-  font-size: 24px;
+  font-size: 28px;
   line-height: 50px;
 }
+
 .recoder {
   height: 100vh;
   text-align: center;
@@ -202,5 +204,16 @@
   20% {
     transform: scaleY(1);
     -webkit-transform: scaleY(1);
+  }
+}
+
+@media screen and (max-width: 743px) {
+  .info__textbox__bigText {
+    font-size: 36px;
+    padding-bottom: 20px;
+  }
+  .recoder__text span {
+    margin-bottom: 20px;
+    font-size: 48px;
   }
 }
