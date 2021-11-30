@@ -89,7 +89,7 @@
 
 .recode__button .stop:hover {
   color: red;
-  background-color: black;
+  background-color: rgb(102, 120, 133);
 }
 
 .recode__button .mic:hover {

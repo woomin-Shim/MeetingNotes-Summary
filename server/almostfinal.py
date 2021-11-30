@@ -199,7 +199,7 @@ def getResult(text):
 
     for i in line :
         fixedline += makeShort(i)
-        fixedline += "\n"
+        fixedline += ". \n"
     fixedline = fixedline[:-1]
     #print("요약 후 :")
     print(fixedline)

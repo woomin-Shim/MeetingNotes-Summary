@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ReactToPrint from 'react-to-print';
 import axios from 'axios';
 import './Result.css';
+import { listen } from 'socket.io';
 const SimpleComponent = (props) => {
   const { printRef } = props;
   const today = new Date();
@@ -9,7 +10,22 @@ const SimpleComponent = (props) => {
   const month = today.getMonth() + 1;
   const date = today.getDate();
 
-  
+ 
+  const [data, setData] = useState('');
+  useEffect ( () => {
+    axios.get('/result')
+    /*
+    .then(function(response) {
+      console.log(response.data)
+    })
+    */
+    .then(res => {
+      setData(res.data.script);
+    })
+  }, []);
+
+  console.log(data)
+ 
   let strDay = `${year} / ${month} / ${date}`;
   return (
     <div className='noteDiv' ref={printRef}>
@@ -37,7 +53,9 @@ const SimpleComponent = (props) => {
         </tr>
         <tr className='meetingNote'>
           <td>회의 내용</td>
-          <td colSpan='3'></td>
+          <td colSpan='3'>
+          {data}
+          </td>
         </tr>
         <tr>
           <td rowSpan='4'>참석자 서명란</td>
@@ -77,22 +95,10 @@ const SimpleComponent = (props) => {
   );
 };
 
+
 function Result () {
 
   const componentRef = useRef(null);
-  
-  var requestOptions = {
-    method : 'GET',
-    redirect : 'follow'
-  };
-
-  useEffect ( () => {
-    axios.get('/result')
-    .then(function(response) {
-      console.log(response.data)
-    })
-  });
-
   /*
   useEffect ( () => {
     axios.get('/speechtoText')

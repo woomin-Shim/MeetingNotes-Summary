@@ -14,7 +14,7 @@ const app = express();
 const server = require('http').Server(app);
 const io = socketio(server);
 const PORT = process.env.PORT || 3030;  //3030 port 사용 
-const textArray = [];
+//const textArray = [];
 //const textInput;
 
 app.use(cors());
@@ -35,7 +35,7 @@ const conn = {
   host : 'localhost',
   port : '3306',
   user : 'root',
-  password : 'dnals12',
+  password : '',
   database : 'meeting'
 };
 
@@ -45,8 +45,10 @@ mysqlDB = mysql.createConnection(conn);
 /*************** socket connection *************************** */
 io.on('connection', (socket) => {
   console.log('connection success');
-
+  var textArray = [];
+  
   socket.on('message', (data) => {
+    
     textArray.push(data.message);
     console.log(data.message);
   })
@@ -55,8 +57,11 @@ io.on('connection', (socket) => {
     console.log('connection end');
     //console.log(textArray);
 
-    const textInput = textArray.toString();  // conversion Array to string 
+    var textInput = [];
+    textInput = textArray.toString();  // conversion Array to string 
+    //textArray = [];
     console.log(textInput);
+    
 
     var sql = 'INSERT INTO script VALUE(?)';
     mysqlDB.query(sql, [textInput], function (err, results) {
@@ -66,8 +71,12 @@ io.on('connection', (socket) => {
       }
     })
 
+    
+
     //python 연동 
     const summary = spawn('python', ['./almostfinal.py', textInput]);
+
+    
 
     //const ex = spawn('python', ['./print.py', textInput]);
 
@@ -102,19 +111,39 @@ io.on('connection', (socket) => {
 });
 
 app.get('/result', function(req, res) {
- var sql = 'SELECT * FROM script';
+ //var sql = 'SELECT * FROM script';
+ var sql = 'SELECT * FROM summary_tbl';
  mysqlDB.query(sql, function(err, results) {
    if(err) {
      return res.send({ code:10, msg: `${err}`});
    }
    else {
-    var script = results[0].contents.replace(/,/g, '\n'); // DB안에 contents 
+    //var script = results[0].contents.replace(/,/g, '\n'); // DB안에 contents 
+    var summary = results[0].summary.replace(/\r\n/g, '\n'); // DB안에 contents 
     console.log('Send to client success');
-    res.send({ code:0, msg: 'request success', script: script });   
+    res.send({ code:0, msg: 'request success', script:summary });   
+    sql = 'DELETE FROM script';
+    mysqlDB.query(sql, function(err, results) {
+      if(err) {
+        return res.send({ code:10, msg: `${err}`});
+      }
+      else {
+       console.log('Delete from script Success');
+      }
+    })
+
+    sql = 'DELETE FROM summary_tbl';
+    mysqlDB.query(sql, function(err, results) {
+      if(err) {
+        return res.send({ code:10, msg: `${err}`});
+      }
+      else {
+       console.log('Delete from sumaary_tbl Success');
+      }
+    })
    }
  })
 });
-
 
 //app.use('/translate', express.static(path.join(__dirname, "../client/translate")));
 

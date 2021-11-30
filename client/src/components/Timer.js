@@ -7,8 +7,8 @@ import queryString from 'query-string';
 
 let socket;
 
-const ENDPOINT = 'http://localhost:3030';  // or ngrok forwading ip 
-//const ENDPOINT = 'https://7e5d-116-122-243-181.ngrok.io';  // or ngrok forwading ip 
+//const ENDPOINT = 'http://localhost:3030';  // or ngrok forwading ip 
+const ENDPOINT = 'https://883f-116-122-243-181.ngrok.io';  // or ngrok forwading ip 
 
 const Timer = () => {
   const [currentState, setCurrentState] = useState(false);
@@ -78,11 +78,14 @@ const Timer = () => {
             녹음중지
           </div>
         
-          <a href ='/result'>
+          
+            <a href='/SpeechtoTextEnd'>
             <button className='icon stop' onMouseOver={showDiv2} onMouseOut={hideDiv2} >
               <i className='fas fa-stop fa-2x'></i>
             </button> 
-          </a>
+            </a>
+            
+          
          
         </div>
       </div>
