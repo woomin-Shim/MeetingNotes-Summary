@@ -7,8 +7,8 @@ import queryString from 'query-string';
 
 let socket;
 
-//const ENDPOINT = 'http://localhost:3030';  // or ngrok forwading ip 
-const ENDPOINT = 'https://abc2-116-122-243-181.ngrok.io';  // or ngrok forwading ip 
+const ENDPOINT = 'http://localhost:3030';  // or ngrok forwading ip 
+//const ENDPOINT = 'https://abc2-116-122-243-181.ngrok.io';  // or ngrok forwading ip 
 
 const Timer = () => {
   const [currentState, setCurrentState] = useState(false);
