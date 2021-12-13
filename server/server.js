@@ -35,7 +35,7 @@ const conn = {
   host : 'localhost',
   port : '3306',
   user : 'root',
-  password : '',
+  password : 'dnals12',
   database : 'meeting'
 };
 
@@ -74,7 +74,7 @@ io.on('connection', (socket) => {
     
 
     //python 연동 
-    const summary = spawn('python', ['./almostfinal.py', textInput]);
+    const summary = spawn('python', ['./finalSummary.py', textInput]);
 
     
 
